@@ -15,3 +15,42 @@ model Example {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
+
+model Word {
+    id            Int         @id @default(autoincrement())
+    name          String      @unique
+    meaning       String
+    sentences     Sentence[]
+    proficiency   Proficiency @relation(fields: [proficiencyId], references: [id])
+    proficiencyId Int         @unique
+    lesson        Lesson      @relation(fields: [lessonId], references: [id])
+    lessonId      Int
+    createdAt     DateTime    @default(now())
+    updatedAt     DateTime    @updatedAt
+}
+
+model Proficiency {
+    id        Int      @id @default(autoincrement())
+    level     Int      @default(1)
+    word      Word?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Sentence {
+    id         Int      @id @default(autoincrement())
+    text       String
+    inflection String
+    word       Word     @relation(fields: [wordId], references: [id])
+    wordId     Int
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+}
+
+model Lesson {
+    id        Int      @id @default(autoincrement())
+    name      String   @unique
+    words     Word[]
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
