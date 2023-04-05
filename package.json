@@ -7,7 +7,8 @@
     "dev": "next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "prisma:seed": "pnpx ts-node -O '{\"module\": \"commonjs\"}' prisma/seed/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.11.0",
@@ -39,6 +40,9 @@
     "prisma": "^4.11.0",
     "tailwindcss": "^3.3.0",
     "typescript": "^5.0.2"
+  },
+  "prisma": {
+    "seed": "pnpm run prisma:seed"
   },
   "ct3aMetadata": {
     "initVersion": "7.10.2"
