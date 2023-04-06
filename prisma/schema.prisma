@@ -16,6 +16,24 @@ model Example {
     updatedAt DateTime @updatedAt
 }
 
+model Language {
+    id        Int      @id @default(autoincrement())
+    name      String   @unique
+    Lesson    Lesson[]
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Lesson {
+    id         Int      @id @default(autoincrement())
+    name       String   @unique
+    words      Word[]
+    language   Language @relation(fields: [languageId], references: [id])
+    languageId Int
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+}
+
 model Word {
     id            Int         @id @default(autoincrement())
     name          String      @unique
@@ -45,12 +63,4 @@ model Sentence {
     wordId     Int
     createdAt  DateTime @default(now())
     updatedAt  DateTime @updatedAt
-}
-
-model Lesson {
-    id        Int      @id @default(autoincrement())
-    name      String   @unique
-    words     Word[]
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
 }
