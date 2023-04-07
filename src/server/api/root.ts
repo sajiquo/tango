@@ -1,6 +1,5 @@
 import { createTRPCRouter } from "~/server/api/trpc";
 import { exampleRouter } from "~/server/api/routers/example";
-import { lessonRouter } from "./routers/lesson";
 import { langaugeRouter } from "./routers/language";
 import { wordRouter } from "./routers/word";
 
@@ -11,7 +10,6 @@ import { wordRouter } from "./routers/word";
  */
 export const appRouter = createTRPCRouter({
   example: exampleRouter,
-  lesson: lessonRouter,
   word: wordRouter,
   language: langaugeRouter,
 });
