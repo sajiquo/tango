@@ -8,8 +8,15 @@ type Props = {
   quizzes: Quiz[];
 };
 
-type State = {
-  current: Quiz | null;
+type State = StrugglingState | AllSolvedState;
+
+type StrugglingState = {
+  current: Quiz;
+} & StatePrivates;
+type AllSolvedState = {
+  current: null;
+} & StatePrivates;
+type StatePrivates = {
   _solved: Set<Quiz>;
 };
 
@@ -21,16 +28,16 @@ const createReducer = (quizzes: readonly Quiz[]): Reducer<State, Action> => {
   return (prev, action) => {
     const pick = () =>
       randomize(quizzes).find((quiz) => !prev._solved.has(quiz)) ?? null;
-    if (action.type === "solved") {
-      prev.current && prev._solved.add(prev.current);
+    if (action.type === "solved" && prev.current) {
+      prev._solved.add(prev.current);
     }
-    console.log("set", Array.from(prev._solved));
     return {
       ...prev,
       current: pick(),
     };
   };
 };
+
 const createInitial = (quizzes: readonly Quiz[]): State => {
   return {
     current: randomize(quizzes)[0] ?? null,
@@ -38,11 +45,11 @@ const createInitial = (quizzes: readonly Quiz[]): State => {
   };
 };
 
+const useQuizQueueReducer = (quizzes: readonly Quiz[]) =>
+  useReducer(createReducer(quizzes), createInitial(quizzes));
+
 export const QuizQueue = ({ quizzes }: Props) => {
-  const [{ current }, dispatch] = useReducer(
-    createReducer(quizzes),
-    createInitial(quizzes)
-  );
+  const [{ current }, dispatch] = useQuizQueueReducer(quizzes);
 
   if (!current) {
     return (
