@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import { type Quiz } from "./quiz";
 import { type Reducer } from "react";
 import { QuizItem } from "./QuizItem";
-import { randomize } from "./utils";
+import { randomize } from "../../utils/array";
 
 type Props = {
   quizzes: Quiz[];

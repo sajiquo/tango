@@ -1,7 +1,7 @@
 import { createTRPCRouter } from "~/server/api/trpc";
 import { exampleRouter } from "~/server/api/routers/example";
 import { langaugeRouter } from "./routers/language";
-import { wordRouter } from "./routers/word";
+import { quizRouter } from "./routers/quiz";
 
 /**
  * This is the primary router for your server.
@@ -10,7 +10,7 @@ import { wordRouter } from "./routers/word";
  */
 export const appRouter = createTRPCRouter({
   example: exampleRouter,
-  word: wordRouter,
+  quiz: quizRouter,
   language: langaugeRouter,
 });
 

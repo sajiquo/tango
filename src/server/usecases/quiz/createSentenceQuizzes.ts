@@ -1,6 +1,6 @@
-import { type Words } from "./useWordsByLesson";
-import type { FourSelects, Quiz } from "./quiz";
-import { randomize } from "./utils";
+import { randomize } from "../../../utils/array";
+import type { WordRepository } from "~/server/repository/word";
+import type { FourSelects, Quiz } from "~/server/domain/quiz";
 
 const nonNullable = <T>(arg: T): arg is NonNullable<T> => !!arg;
 
@@ -11,6 +11,8 @@ const assureFourSelects = (maybeFs: readonly string[]): FourSelects => [
   maybeFs[2] ?? INVALID_SELECT,
   maybeFs[3] ?? INVALID_SELECT,
 ];
+
+type Words = Awaited<ReturnType<WordRepository["getAllByLesson"]>>;
 
 export const createSentenceQuizzes = (words: Words): Quiz[] => {
   const randomized = randomize(words);

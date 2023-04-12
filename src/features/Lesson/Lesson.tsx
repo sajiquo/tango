@@ -1,17 +1,12 @@
-import { useWordsByLesson } from "./useWordsByLesson";
-import { createSentenceQuizzes } from "./createSentenceQuizzes";
+import { api } from "~/utils/api";
 import { QuizQueue } from "./QuizQueue";
 
 type Props = {
-  lessonId: string;
+  lessonId: number;
 };
 
 export const Lesson = ({ lessonId }: Props) => {
-  const { data, isLoading, isError } = useWordsByLesson({
-    lessonId: Number(lessonId),
-  });
-
+  const { data, isLoading, isError } = api.quiz.getAllByLesson.useQuery({ lessonId });
   if (isLoading || isError) return null;
-
-  return <QuizQueue quizzes={createSentenceQuizzes(data)} />;
+  return <QuizQueue quizzes={data} />;
 };
