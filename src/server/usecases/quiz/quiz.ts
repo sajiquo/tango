@@ -9,9 +9,7 @@ type QuizUseCaseInit = {
   wordRepository: WordRepository;
 };
 
-export const createQuizUseCase = ({ wordRepository }: QuizUseCaseInit) => {
-  return {
-    getQuizzes: async (params: ByLessonIdParams): Promise<Quiz[]> =>
-      createSentenceQuizzes(await wordRepository.getAllByLesson(params)),
-  };
-};
+export const createQuizUseCase = ({ wordRepository }: QuizUseCaseInit) => ({
+  getQuizzes: async (params: ByLessonIdParams): Promise<Quiz[]> =>
+    createSentenceQuizzes(await wordRepository.getAllByLesson(params)),
+});

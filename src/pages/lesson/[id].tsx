@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
-import { Lesson } from "~/features/Lesson";
+import { Lesson } from "~/components/Lesson";
+import { Main } from "~/components/Main";
 
 const LessonPage = () => {
   const query = useRouter().query;
@@ -7,9 +8,9 @@ const LessonPage = () => {
   if (typeof id !== "string") return null;
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
+    <Main>
       <Lesson lessonId={parseInt(id)} />
-    </main>
+    </Main>
   );
 };
 
