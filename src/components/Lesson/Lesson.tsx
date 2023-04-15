@@ -22,6 +22,7 @@ const LessonInner = ({ quizzes }: InnerProps) => {
 
   return (
     <QuizItem
+      key={current.wordId}
       quiz={current}
       onSolved={() => dispatch({ type: "solved" })}
       onFlawed={() => dispatch({ type: "flawed" })}

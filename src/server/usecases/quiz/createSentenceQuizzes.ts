@@ -31,9 +31,13 @@ export const createSentenceQuizzes = (words: Words): Quiz[] => {
           randomize([
             answer,
             ...randomize(
-              Array.from(new Set(randomized.flatMap((word) => word.sentences)))
-                .map((s) => s.inflection)
-                .filter((word) => word !== answer)
+              Array.from(
+                new Set(
+                  randomized
+                    .flatMap((word) => word.sentences)
+                    .map((s) => s.inflection)
+                )
+              ).filter((word) => word !== answer)
             ).slice(0, 3),
           ])
         ),
