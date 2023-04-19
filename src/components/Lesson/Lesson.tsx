@@ -7,7 +7,6 @@ type Props = {
   lessonId: number;
 };
 
-
 type InnerProps = {
   quizzes: Quiz[];
 };
@@ -15,9 +14,7 @@ const LessonInner = ({ quizzes }: InnerProps) => {
   const [{ current }, dispatch] = useQuizQueueReducer(quizzes);
 
   if (!current) {
-    return (
-      <div>end</div>
-    );
+    return <div>end</div>;
   }
 
   return (
@@ -28,10 +25,12 @@ const LessonInner = ({ quizzes }: InnerProps) => {
       onFlawed={() => dispatch({ type: "flawed" })}
     />
   );
-}
+};
 
 export const Lesson = ({ lessonId }: Props) => {
-  const { data, isLoading, isError } = api.quiz.getAllByLesson.useQuery({ lessonId });
+  const { data, isLoading, isError } = api.quiz.getAllByLesson.useQuery({
+    lessonId,
+  });
   if (isLoading || isError) return null;
   return <LessonInner quizzes={data} />;
 };

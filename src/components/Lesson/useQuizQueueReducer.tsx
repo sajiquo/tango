@@ -3,9 +3,6 @@ import { type Reducer } from "react";
 import { type Quiz } from "./query";
 import { randomize } from "../../utils/array";
 
-
-
-
 type State = StrugglingState | AllSolvedState;
 
 type StrugglingState = {
