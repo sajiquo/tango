@@ -9,7 +9,7 @@ export const LessonList = () => {
     <article className="flex flex-row gap-10 text-4xl">
       {data.map((lang) => (
         <section key={lang.id}>
-          <h2 className="text-base font-bold text-yellow-900">{lang.name}</h2>
+          <h2 className="text-base font-bold text-yellow-500">{lang.name}</h2>
           <ul>
             {lang.Lesson.map((les) => (
               <li key={les.id} className="hover:text-gray-500">
