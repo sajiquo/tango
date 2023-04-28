@@ -1,15 +1,9 @@
-import { z } from "zod";
 import type { prisma } from "~/server/db";
-
-export const ByLessonIdParamsSchema = z.object({
-  lessonId: z.coerce.number().int(),
-});
-
-export type ByLessonIdParams = z.infer<typeof ByLessonIdParamsSchema>;
+import { type LessonIdParams } from "../api/routers/quiz";
 export type WordRepository = ReturnType<typeof createPrismaWordRepository>;
 
 export const createPrismaWordRepository = (client: typeof prisma) => ({
-  getAllByLesson: async ({ lessonId }: ByLessonIdParams) =>
+  getAllByLesson: async ({ lessonId }: LessonIdParams) =>
     client.word.findMany({
       where: { lessonId },
       select: {

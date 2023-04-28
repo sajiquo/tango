@@ -28,8 +28,9 @@ const LessonInner = ({ quizzes }: InnerProps) => {
 };
 
 export const Lesson = ({ lessonId }: Props) => {
-  const { data, isLoading, isError } = api.quiz.getAllByLesson.useQuery({
+  const { data, isLoading, isError } = api.quiz.getByLesson.useQuery({
     lessonId,
+    limit: 10
   });
   if (isLoading || isError) return null;
   return <LessonInner quizzes={data} />;
