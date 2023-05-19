@@ -40,5 +40,11 @@ const createInitial = (quizzes: readonly Quiz[]): State => {
   };
 };
 
-export const useQuizQueueReducer = (quizzes: readonly Quiz[]) =>
-  useReducer(createReducer(quizzes), createInitial(quizzes));
+export const useQuizQueueReducer = (quizzes: readonly Quiz[]) => {
+  const [state, dispatch] = useReducer(createReducer(quizzes), createInitial(quizzes));
+  return {
+    current: state.current,
+    solvedCount: state._solved.size,
+    dispatch
+  }
+}

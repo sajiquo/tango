@@ -11,7 +11,7 @@ export const createMeaningQuizzes = (words: Words): Quiz[] => {
       return {
         wordId: word.id,
         answer,
-        question: `which is the meaning of ${word.name}`,
+        question: `which is the meaning of "${word.name}"`,
         hint: randomize(word.sentences)[0]?.text ?? "",
         selects: assureFourSelects(
           randomize([
